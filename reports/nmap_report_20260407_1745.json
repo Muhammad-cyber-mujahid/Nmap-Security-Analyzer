@@ -1,0 +1,127 @@
+{
+  "scan_date": "2026-04-07T17:45:12.327239",
+  "total_hosts": 4,
+  "risky_hosts": [
+    {
+      "ip": "192.168.10.45",
+      "hostname": "fileserver-old",
+      "risky_ports": [
+        {
+          "port": "3389",
+          "service": "RDP",
+          "version": "Microsoft Terminal Services",
+          "name": "RDP",
+          "risk": "Critical",
+          "weight": 30
+        },
+        {
+          "port": "445",
+          "service": "SMB",
+          "version": "Microsoft Windows SMB",
+          "name": "SMB",
+          "risk": "High",
+          "weight": 25
+        },
+        {
+          "port": "23",
+          "service": "Telnet",
+          "version": "",
+          "name": "Telnet",
+          "risk": "Critical",
+          "weight": 35
+        }
+      ],
+      "total_open": 3,
+      "risk_score": 100,
+      "highest_risk": "High"
+    },
+    {
+      "ip": "10.0.0.22",
+      "hostname": "webserver-vuln",
+      "risky_ports": [
+        {
+          "port": "21",
+          "service": "FTP",
+          "version": "vsftpd 2.3.4",
+          "name": "FTP",
+          "risk": "High",
+          "weight": 20
+        },
+        {
+          "port": "5900",
+          "service": "VNC",
+          "version": "RealVNC 4.0",
+          "name": "VNC",
+          "risk": "High",
+          "weight": 18
+        },
+        {
+          "port": "1433",
+          "service": "MSSQL",
+          "version": "Microsoft SQL Server 2014",
+          "name": "MSSQL",
+          "risk": "High",
+          "weight": 22
+        }
+      ],
+      "total_open": 3,
+      "risk_score": 100,
+      "highest_risk": "High"
+    },
+    {
+      "ip": "172.16.5.10",
+      "hostname": "ssh-server",
+      "risky_ports": [
+        {
+          "port": "22",
+          "service": "SSH",
+          "version": "OpenSSH 7.2",
+          "name": "SSH",
+          "risk": "High",
+          "weight": 25,
+          "reason": "Outdated OpenSSH - vulnerable"
+        },
+        {
+          "port": "3306",
+          "service": "MySQL",
+          "version": "MySQL 5.7",
+          "name": "MySQL",
+          "risk": "High",
+          "weight": 22
+        }
+      ],
+      "total_open": 2,
+      "risk_score": 100,
+      "highest_risk": "High"
+    },
+    {
+      "ip": "192.168.1.100",
+      "hostname": "backup-server",
+      "risky_ports": [
+        {
+          "port": "3389",
+          "service": "RDP",
+          "version": "",
+          "name": "RDP",
+          "risk": "Critical",
+          "weight": 30
+        },
+        {
+          "port": "445",
+          "service": "SMB",
+          "version": "",
+          "name": "SMB",
+          "risk": "High",
+          "weight": 25
+        }
+      ],
+      "total_open": 2,
+      "risk_score": 100,
+      "highest_risk": "High"
+    }
+  ],
+  "summary": {
+    "avg_risk_score": 100.0,
+    "critical_hosts": 0
+  }
+}

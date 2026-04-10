@@ -1,0 +1,71 @@
+
+    <!DOCTYPE html>
+    <html lang="en" data-theme="dark">
+    <head>
+        <meta charset="UTF-8">
+        <title>Nmap Risk Report - 2026-04-07</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <style>
+            body { font-family: Arial, sans-serif; background:#1e1e1e; color:#eee; margin:40px; }
+            table { width:100%; border-collapse:collapse; margin:20px 0; }
+            th, td { border:1px solid #444; padding:10px; text-align:left; }
+            th { background:#333; cursor:pointer; }
+            .critical { color:#ff5555; } .high { color:#ffaa00; }
+            .card { background:#2d2d2d; padding:20px; border-radius:8px; margin:15px 0; }
+        </style>
+    </head>
+    <body>
+        <h1>🔍 Nmap Security Risk Report</h1>
+        <div class="card">
+            <h2>Summary</h2>
+            <p><strong>Average Risk Score:</strong> 0 / 100</p>
+            <p><strong>Critical Hosts:</strong> 0</p>
+        </div>
+
+        <canvas id="riskChart" width="800" height="400"></canvas>
+
+        <table id="riskTable">
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0)">IP / Host</th>
+                    <th onclick="sortTable(1)">Risk Score</th>
+                    <th onclick="sortTable(2)">Highest Risk</th>
+                    <th onclick="sortTable(3)">Risky Ports</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+
+        <script>
+            // Risk Score Distribution Chart
+            const ctx = document.getElementById('riskChart');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Host Risk Score',
+                        data: [],
+                        backgroundColor: '#ff5555'
+                    }]
+                },
+                options: { responsive: true, scales: { y: { beginAtZero: true, max: 100 } } }
+            });
+
+            // Simple Sortable Table
+            function sortTable(n) {
+                let table = document.getElementById("riskTable");
+                let rows = Array.from(table.rows).slice(1);
+                rows.sort((a, b) => {
+                    let x = a.cells[n].textContent.trim();
+                    let y = b.cells[n].textContent.trim();
+                    return isNaN(x) ? x.localeCompare(y) : parseFloat(x) - parseFloat(y);
+                });
+                rows.forEach(row => table.tBodies[0].appendChild(row));
+            }
+        </script>
+    </body>
+    </html>
+    

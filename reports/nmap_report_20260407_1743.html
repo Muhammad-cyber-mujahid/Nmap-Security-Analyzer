@@ -1,0 +1,127 @@
+
+    <!DOCTYPE html>
+    <html lang="en" data-theme="dark">
+    <head>
+        <meta charset="UTF-8">
+        <title>Nmap Risk Report - 2026-04-07</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <style>
+            body { font-family: Arial, sans-serif; background:#1e1e1e; color:#eee; margin:40px; }
+            table { width:100%; border-collapse:collapse; margin:20px 0; }
+            th, td { border:1px solid #444; padding:10px; text-align:left; }
+            th { background:#333; cursor:pointer; }
+            .critical { color:#ff5555; } .high { color:#ffaa00; }
+            .card { background:#2d2d2d; padding:20px; border-radius:8px; margin:15px 0; }
+        </style>
+    </head>
+    <body>
+        <h1>🔍 Nmap Security Risk Report</h1>
+        <div class="card">
+            <h2>Summary</h2>
+            <p><strong>Average Risk Score:</strong> 100.0 / 100</p>
+            <p><strong>Critical Hosts:</strong> 0</p>
+        </div>
+
+        <canvas id="riskChart" width="800" height="400"></canvas>
+
+        <table id="riskTable">
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0)">IP / Host</th>
+                    <th onclick="sortTable(1)">Risk Score</th>
+                    <th onclick="sortTable(2)">Highest Risk</th>
+                    <th onclick="sortTable(3)">Risky Ports</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr>
+                    <td>192.168.10.45 (fileserver-old)</td>
+                    <td class="critical">100</td>
+                    <td>High</td>
+                    <td>
+                        
+                            <b>3389</b> (RDP)<br>
+                        
+                            <b>445</b> (SMB)<br>
+                        
+                            <b>23</b> (Telnet)<br>
+                        
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>10.0.0.22 (webserver-vuln)</td>
+                    <td class="critical">100</td>
+                    <td>High</td>
+                    <td>
+                        
+                            <b>21</b> (FTP)<br>
+                        
+                            <b>5900</b> (VNC)<br>
+                        
+                            <b>1433</b> (MSSQL)<br>
+                        
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>172.16.5.10 (ssh-server)</td>
+                    <td class="critical">100</td>
+                    <td>High</td>
+                    <td>
+                        
+                            <b>22</b> (SSH)<br>
+                        
+                            <b>3306</b> (MySQL)<br>
+                        
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>192.168.1.100 (backup-server)</td>
+                    <td class="critical">100</td>
+                    <td>High</td>
+                    <td>
+                        
+                            <b>3389</b> (RDP)<br>
+                        
+                            <b>445</b> (SMB)<br>
+                        
+                    </td>
+                </tr>
+                
+            </tbody>
+        </table>
+
+        <script>
+            // Risk Score Distribution Chart
+            const ctx = document.getElementById('riskChart');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ["192.168.10.45", "10.0.0.22", "172.16.5.10", "192.168.1.100"],
+                    datasets: [{
+                        label: 'Host Risk Score',
+                        data: [100, 100, 100, 100],
+                        backgroundColor: '#ff5555'
+                    }]
+                },
+                options: { responsive: true, scales: { y: { beginAtZero: true, max: 100 } } }
+            });
+
+            // Simple Sortable Table
+            function sortTable(n) {
+                let table = document.getElementById("riskTable");
+                let rows = Array.from(table.rows).slice(1);
+                rows.sort((a, b) => {
+                    let x = a.cells[n].textContent.trim();
+                    let y = b.cells[n].textContent.trim();
+                    return isNaN(x) ? x.localeCompare(y) : parseFloat(x) - parseFloat(y);
+                });
+                rows.forEach(row => table.tBodies[0].appendChild(row));
+            }
+        </script>
+    </body>
+    </html>
+    
