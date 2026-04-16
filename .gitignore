@@ -16,7 +16,6 @@ __pycache__/
 .DS_Store
 
 # Project specific - large or generated files
-reports/
 *.xml
 scan*.xml
 

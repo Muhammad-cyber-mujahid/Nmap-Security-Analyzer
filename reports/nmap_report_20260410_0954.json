@@ -1,0 +1,9 @@
+{
+  "scan_date": "2026-04-10T09:54:42.092417",
+  "total_hosts": 1,
+  "risky_hosts": [],
+  "summary": {
+    "avg_risk_score": 0,
+    "critical_hosts": 0
+  }
+}
